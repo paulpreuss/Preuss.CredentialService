@@ -5,7 +5,10 @@ namespace Preuss.CredentialService.MongoAccess.Repositories;
 
 public class CredentialRepository : ICredentialRepository
 {
-	public CredentialRepository()
+    private readonly string _connectionString;
+
+    public CredentialRepository(string connectionString)
 	{
+		_connectionString = connectionString;
 	}
 }
