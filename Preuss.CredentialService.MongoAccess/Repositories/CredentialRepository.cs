@@ -1,5 +1,4 @@
-﻿using System;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using Preuss.CredentialService.MongoAccess.Abstracts.DataClasses;
 using Preuss.CredentialService.MongoAccess.Abstracts.Repositories;
 
