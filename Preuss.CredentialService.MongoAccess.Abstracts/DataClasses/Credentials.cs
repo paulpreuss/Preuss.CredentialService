@@ -11,4 +11,6 @@ public class Credentials
 	public string Username { get; set; }
 	public string HashedPassword { get; set; }
 	public string Email { get; set; }
+    public IEnumerable<string> FriendIds { get; set; }
+	public IEnumerable<string> FitnessGroupIds { get; set; }
 }
