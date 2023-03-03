@@ -33,7 +33,21 @@ public class CredentialRepository : ICredentialRepository
 		return (Credentials)result;
 	}
 
-	public Task AddCredentials(Credentials credentials)
+    public async Task<Credentials> GetCredentialsByNameAndPasswordAsync(string name, string password)
+    {
+        var result = await _collection.FindAsync(x => x.Username == name && x.HashedPassword == password);
+
+        return (Credentials)result;
+    }
+
+    public async Task<Credentials> GetCredentialsByEmailAsync(string email)
+    {
+        var result = await _collection.FindAsync(x => x.Email == email);
+
+        return (Credentials)result;
+    }
+
+    public Task AddCredentials(Credentials credentials)
 	{
 		return _collection.InsertOneAsync(credentials);
 	}
