@@ -11,14 +11,14 @@ namespace Preuss.CredentialService.Controllers;
 public class CredentialController : ControllerBase
 {
     private readonly ILogger<CredentialController> _logger;
-    private readonly ICredentialProcessor _proseccor;
+    private readonly ICredentialProcessor _processor;
     private readonly ICredentialsValidator _validator;
 
     public CredentialController(ILogger<CredentialController> logger,
         ICredentialProcessor processor, ICredentialsValidator validator)
 	{
         _logger = logger;
-        _proseccor = processor;
+        _processor = processor;
         _validator = validator;
 	}
 
@@ -34,7 +34,7 @@ public class CredentialController : ControllerBase
             if (string.IsNullOrWhiteSpace(credentials.HashedPassword))
                 return new BadRequestObjectResult("User password is not valid.");
 
-            var user = await _proseccor.LoginAsync(credentials.Username,
+            var user = await _processor.LoginAsync(credentials.Username,
                 credentials.HashedPassword);
 
             if (user is null)
@@ -63,7 +63,7 @@ public class CredentialController : ControllerBase
             if (!_validator.IsValidPassword(credentials.HashedPassword))
                 return new BadRequestObjectResult("User password is not valid.");
 
-            await _proseccor.CreateUserAsync(credentials, credentials.HashedPassword);
+            await _processor.CreateUserAsync(credentials, credentials.HashedPassword);
 
             return new OkResult();
         }
